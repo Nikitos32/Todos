@@ -3,16 +3,33 @@ import {ITodo} from "./List";
 
 interface ItemProps {
     todos: ITodo
+
+    toggleComplete(id: number): void
+
+    removeItem(id: number): void
 }
 
-const ItemList: FC<ItemProps> = ({todos}) => {
+const ItemList: FC<ItemProps> = ({todos, toggleComplete, removeItem}) => {
+    let classes: string = ''
+
+    if (todos.completed) {
+        classes = "completed"
+    }
+    else classes = ''
+
     return (
-        <div>
+        <div className="listItem">
             <label>
-                <input type="checkbox" className="filled-in" checked={todos.completed}/>
-                <span>{todos.title}</span>
+                <input
+                    onChange={toggleComplete.bind(null, todos.id)}
+                    type="checkbox"
+                    className="filled-in"
+                    checked={todos.completed}/>
+                <span className={classes}>{todos.title}</span>
             </label>
-            <i className="material-icons red-text">delete</i>
+            <button className="buttonDelete" onClick={removeItem.bind(null, todos.id)}>
+                <i className="material-icons red-text">delete</i>
+            </button>
         </div>
     )
 }

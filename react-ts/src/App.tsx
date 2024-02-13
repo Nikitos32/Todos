@@ -4,10 +4,10 @@ import List from "./components/List";
 
 const App: FC = () => {
     return (
-        <>
+        <div className="app">
             <Navbar />
             <List />
-        </>
+        </div>
     )
 }
 
